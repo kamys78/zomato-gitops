@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zomato
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kamys78/zomato-gitops.git
+    targetRevision: main
+    path: k8s/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: zomato
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: zomato
+      namespace: zomato
+      jsonPointers:
+        - /spec/replicas
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
