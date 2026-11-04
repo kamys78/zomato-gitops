@@ -5,4 +5,4 @@ resources:
 images:
   - name: zomato-app
     newName: 828546187340.dkr.ecr.us-east-1.amazonaws.com/zomato-app
-    newTag: bootstrap
+    newTag: 7813097979bb70776d16b5ce9c66cdc4b7f006ff
